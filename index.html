@@ -1,68 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-  <head>
-  <title></title>
-  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
-	<meta charset="utf-8">
+    <head>
+        <title>Mendix Mobile</title>
 
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
 
-	<!-- iPad/iPhone specific css below, add after your main css >
-	<link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />		
-	<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />		
-	-->
-	<!-- If your application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
-	<script type="text/javascript" charset="utf-8" src="cordova-1.7.0.js"></script>
-    <script type="text/javascript" charset="utf-8" src="loader.js"></script>
-
-    <link type="text/css" rel="stylesheet" href="https://elements-accp.mendixcloud.com/mxclientsystem/mobile/ui/mobile.css" media="screen"/>
-
-    <script type="text/javascript">
-        window.mxTargetURL = "https://elements-accp.mendixcloud.com/index-mobile.html";
-    </script>
-
-    <script type="text/javascript">
-
-
-	// If you want to prevent dragging, uncomment this section
-	/*
-	function preventBehavior(e) 
-	{ 
-      e.preventDefault(); 
-    };
-	document.addEventListener("touchmove", preventBehavior, false);
-	*/
-	
-	/* If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
-	see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
-	for more details -jm */
-	/*
-	function handleOpenURL(url)
-	{
-		// TODO: do something with the url passed in.
-	}
-	*/
-	
-	function onBodyLoad()
-	{		
-        document.addEventListener("deviceready", onDeviceReady, false);
-	}
-	
-	/* When this function is called, Cordova has been initialized and is ready to roll */
-	/* If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
-	see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
-	for more details -jm */
-	function onDeviceReady()
-    {
-        loader();
-	}
-    
-    </script>
-  </head>
-  <body onload="onBodyLoad()">
-      <div id="container" style="width:100%;height:100%">
-          <iframe id="frameTarget" style="width:100%;height:100%;margin:0;border:0;">
-          </iframe>
-      </div>
-  </body>
+        <script type="text/javascript" charset="utf-8" src="cordova-1.7.0.js"></script>
+        <script type="text/javascript" charset="utf-8" src="mxappcontainer.js"></script>
+        
+        <script type="text/javascript">
+        	// Change this to the base URL of your Mendix app.      	
+        	startup("http://app.example.com");
+        	
+        	document.addEventListener("deviceready", function() {
+        		addCss("mxclientsystem/mobile/ui/mobile.css");
+        		addScript("mxclientsystem/mobile/mobile.js");
+            }, false);
+        </script>
+    </head>
+    <body>
+        <div id="content"></div>
+    </body>
 </html>

@@ -28,6 +28,8 @@
 		link.media = "screen";
 		
 	    head.appendChild(link);
+	    
+	    return link;
 	};
 	
 	window.addScript = function(href) {
@@ -38,5 +40,36 @@
 	    script.src  = baseUrl + "/" + href;    
 	    
 	    head.appendChild(script);
+	    
+	    return script;
 	};
-})();        		
+	
+	window.overrideMenubarConfig = function() {
+		var oldFunc = mx.session.startup;
+		
+		mx.session.startup = function() {
+			var menuConfig = mx.session.getConfig("uiconfig.menubar");
+			
+			for (var i = 0, item; item = menuConfig[i]; ++i) {
+				if (item.icon) {
+					item.icon = baseUrl + "/" + item.icon;
+				}
+			}
+			
+			return oldFunc.apply(mx.session, arguments);
+		};
+	};
+	      	
+	window.overrideWidgetProperty = function(widget, property) {
+		var proto   = mobile.widget[widget].prototype,
+		    oldFunc = proto.postMixInProperties;
+		
+		proto.postMixInProperties = function() {
+			if (this[property]) {
+				this[property] = baseUrl + "/" + this[property];
+			}
+			
+			return oldFunc.apply(this, arguments);
+		};
+	};
+})();

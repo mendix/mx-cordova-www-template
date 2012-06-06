@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
 
         <script type="text/javascript" charset="utf-8" src="cordova-1.7.0.js"></script>
-        <script type="text/javascript" charset="utf-8" src="mxappcontainer.js"></script>
+        <script type="text/javascript" charset="utf-8" src="mxapp.js"></script>
         
         <script type="text/javascript">
         	// Change this to the base URL of your Mendix app.      	
@@ -15,12 +15,7 @@
         	document.addEventListener("deviceready", function() {
         		addCss("mxclientsystem/mobile/ui/mobile.css");
         		
-        		var script = addScript("mxclientsystem/mobile/mobile.js");
-        		script.onload = function() {
-        			overrideMenubarConfig();
-        			overrideWidgetProperty("_Button", "iconUrl");
-        			overrideWidgetProperty("DropDownItem", "icon");        		
-        		};
+        		overrideMobile(addScript("mxclientsystem/mobile/mobile.js"));
             }, false);
         </script>
     </head>

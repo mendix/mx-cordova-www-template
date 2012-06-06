@@ -44,7 +44,7 @@
 	    return script;
 	};
 	
-	window.overrideMenubarConfig = function() {
+	var overrideMenubarConfig = function() {
 		var oldFunc = mx.session.startup;
 		
 		mx.session.startup = function() {
@@ -60,7 +60,7 @@
 		};
 	};
 	      	
-	window.overrideWidgetProperty = function(widget, property) {
+	var overrideWidgetProperty = function(widget, property) {
 		var proto   = mobile.widget[widget].prototype,
 		    oldFunc = proto.postMixInProperties;
 		
@@ -70,6 +70,14 @@
 			}
 			
 			return oldFunc.apply(this, arguments);
+		};
+	};
+
+	window.overrideMobile = function(scriptNode) {
+		scriptNode.onload = function() {
+			overrideMenubarConfig();
+			overrideWidgetProperty("_Button", "iconUrl");
+			overrideWidgetProperty("DropDownItem", "icon");        		
 		};
 	};
 })();

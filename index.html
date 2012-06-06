@@ -14,7 +14,13 @@
         	
         	document.addEventListener("deviceready", function() {
         		addCss("mxclientsystem/mobile/ui/mobile.css");
-        		addScript("mxclientsystem/mobile/mobile.js");
+        		
+        		var script = addScript("mxclientsystem/mobile/mobile.js");
+        		script.onload = function() {
+        			overrideMenubarConfig();
+        			overrideWidgetProperty("_Button", "iconUrl");
+        			overrideWidgetProperty("DropDownItem", "icon");        		
+        		};
             }, false);
         </script>
     </head>
